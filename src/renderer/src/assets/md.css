@@ -1,0 +1,49 @@
+.md-code{
+  margin-top: 2%;
+  background: rgb(0,0,0,0.1);
+  border-radius: 10px;
+  width: 80%;
+  min-height: 10vh;
+  padding: 2% 1%;
+}
+
+.md-quote{
+  margin-top: 1%;
+  border-left: 5px solid rgb(0,0,0,0.2);
+  min-width: 10%;
+  min-height: 3vh;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding-left: 5%;
+}
+
+.md-quote2{
+  margin-top: 1%;
+  border-left: 10px double rgb(0,0,0,0.2);
+  min-width: 10%;
+  min-height: 3vh;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding-left: 5%;
+}
+
+
+.md-h1, .md-h2, .md-h3, .md-h4, .md-h5, .md-h6{
+  min-height: 2vh;
+}
+
+
+.md-hr{
+  height: 1px;
+  background: rgba(0,0,0,0.2);
+  border: none;
+  margin: 2% 0;
+}
+
+.md-ul{
+  list-style-type: "- ";
+  list-style-position: inside;
+
+}
