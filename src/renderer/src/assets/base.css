@@ -22,4 +22,12 @@ html,body{
   width: 100%;
   height: 100%;
   position: relative;
+  background: var(--bg);
+}
+
+
+:root{
+  --bg: #161616;
+  --blue: #3D7AFF;
+  --subtitle:#C7C7C7;
 }

@@ -1,11 +1,13 @@
 #titlebar{
   width: 100%;
   height: 30px;
+  z-index: 100;
   display: flex;
   position: absolute;
   top: 0;
   left: 0;
   align-items: center;
+  justify-content: center;
   -webkit-app-region: drag;
 }
 
@@ -14,7 +16,7 @@
   left: 1%;
   top: 0;
   width: 10%;
-  height: 100%;
+  height: 90%;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -24,7 +26,7 @@
   }
 
   &>p{
-    color: black;
+    color: white;
     font: 10pt Roboto;
   }
   -webkit-app-region: no-drag;
