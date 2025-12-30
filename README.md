@@ -33,3 +33,8 @@ npm run build:mac
 # Linux
 npm run build:linux
 ```
+
+# Screens
+
+![](./docs/screen1.png)
+![](./docs/screen2.png)
