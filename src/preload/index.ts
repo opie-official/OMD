@@ -8,6 +8,7 @@ const api = {
   t_close: () => electronAPI.ipcRenderer.send("t_close"),
   file_create: ()=> electronAPI.ipcRenderer.invoke("file_create"),
   file_open: ()=> electronAPI.ipcRenderer.invoke("file_open"),
+  file_save: (text: string, file:string)=> electronAPI.ipcRenderer.send("file_save", text, file),
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

@@ -11,15 +11,52 @@ import MainPage from "@renderer/components/MainPage";
 function App(): React.JSX.Element {
 
 
-  const [cur, setCur]=useState<0|1>(0);
-  const [file, setFile]=useState("")
+    const [cur, setCur] = useState<0 | 1>(0);
+    const [file, setFile] = useState("")
+    const [text, setText] = useState("")
+    const [saved, setSaved] = useState(true);
 
-  return (
-    <>
-      <TitleBar/>
-      {cur==0?<StartPage setCur={setCur} setFile={setFile}/> : <MainPage file={file}/>}
-    </>
-  )
+    function saveFile() {
+        if (!saved) {
+            window.api.file_save(text, file);
+            setSaved(true);
+        }
+    }
+
+    async function newFile() {
+        const res = await window.api.file_create();
+        setFile(res);
+        setText("");
+    }
+
+    async function openFile(){
+        const path = await window.api.file_open();
+        console.log(`path ${path}`)
+        if (path[0].length > 0) {
+            setFile(path[0]);
+            setCur(1);
+            setText(path[1]);
+        }
+    }
+
+    function close(){
+        saveFile();
+        setText("");
+        setFile("");
+        setCur(0);
+    }
+
+
+
+    return (
+        <>
+            <TitleBar close={close} openFile={openFile} newFile={newFile} saved={saved} text={text} save={saveFile} setCur={setCur} cur={cur}/>
+            {cur == 0 ?
+                <StartPage setText={setText} setCur={setCur} setFile={setFile}/> :
+                <MainPage setSaved={setSaved} saved={saved} file={file} text={text} setText={setText}/>
+            }
+        </>
+    )
 }
 
 export default App

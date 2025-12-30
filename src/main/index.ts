@@ -82,7 +82,7 @@ app.whenReady().then(() => {
   })
   ipcMain.handle("file_open", async (e) => {
     const a = await dialog.showOpenDialog({
-      title: "Create file",
+      title: "Open file",
       filters:[
         {
           name:"Markdown",
@@ -92,8 +92,14 @@ app.whenReady().then(() => {
     })
 
     const path = a.filePaths[0];
-    return `${path}`;
+    const text = fs.readFileSync(path, "utf-8")
+    return [`${path}`, `${text}`];
   })
+
+  ipcMain.on("file_save", (e, text:string, file:string)=>{
+    fs.writeFileSync(file, text);
+  })
+
 
   createWindow()
 

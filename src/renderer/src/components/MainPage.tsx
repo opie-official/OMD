@@ -11,6 +11,10 @@ import rehypeSanitize from "rehype-sanitize";
 
 interface Props {
   file: string;
+  text: string;
+  setText: React.Dispatch<React.SetStateAction<string>>;
+  setSaved: React.Dispatch<React.SetStateAction<boolean>>;
+  saved: boolean;
 }
 
 
@@ -18,7 +22,8 @@ export default function MainPage(props: Props) {
 
   const [bgWidth, setBgWidth] = useState(0);
   const [width, setWidth] = useState(0);
-  const [text, setText] = useState("")
+
+  const {text, setText} = props;
 
   useEffect(() => {
     const sz = document.body.offsetWidth;
@@ -26,14 +31,13 @@ export default function MainPage(props: Props) {
     setBgWidth(sz);
   }, []);
   const splited = props.file.includes("/") ? props.file.split("/") : props.file.split("\\");
-
   return (
     <div id={"main-page"}>
       <header id={"main-header"}>
         <p id={"main-header-md"}>Markdown</p>
         <div id={"main-header-filename"}>
           <p id={"main-header-filename-in"}>
-            {splited[splited.length - 1]}
+            {props.saved? splited[splited.length - 1]:`${splited[splited.length - 1]}*`}
           </p>
         </div>
         <p id={"main-header-preview"}>Preview</p>
@@ -45,7 +49,10 @@ export default function MainPage(props: Props) {
           <div id={"main-md-rows"}></div>
           <div id={"main-md-text"}>
             {/*<div id={"main-md-light"}><CodeLight text={text}/></div>*/}
-            <textarea id={"main-md-raw"} onInput={(e)=>setText(e.currentTarget.value)}/>
+            <textarea id={"main-md-raw"} value={text} onInput={(e) => {
+              setText(e.currentTarget.value);
+              props.setSaved(false)
+            }}/>
           </div>
         </div>
         <hr id={"main-hr"}/>
@@ -57,31 +64,31 @@ export default function MainPage(props: Props) {
               remarkPlugins={[remarkBreaks, remarkGfm]}
               rehypePlugins={[rehypeRaw, rehypeSanitize]}
               components={{
-                h1:(e)=>{
+                h1: (e) => {
                   return <h1 className={"md-h1"}>{e.children}</h1>
                 },
-                h2:(e)=>{
+                h2: (e) => {
                   return <h1 className={"md-h2"}>{e.children}</h1>
                 },
-                h3:(e)=>{
+                h3: (e) => {
                   return <h1 className={"md-h3"}>{e.children}</h1>
                 },
-                h4:(e)=>{
+                h4: (e) => {
                   return <h1 className={"md-h4"}>{e.children}</h1>
                 },
-                h5:(e)=>{
+                h5: (e) => {
                   return <h1 className={"md-h5"}>{e.children}</h1>
                 },
-                h6:(e)=>{
+                h6: (e) => {
                   return <h1 className={"md-h6"}>{e.children}</h1>
                 },
-                blockquote: (e)=> {
+                blockquote: (e) => {
                   return <div className={"md-quote"}>{e.children}</div>
                 },
-                br: (e)=>{
+                br: (e) => {
                   return <br/>
                 },
-                p:(e)=>{
+                p: (e) => {
                   return <p className={"md-p"}>{e.children}</p>
                 }
               }}
