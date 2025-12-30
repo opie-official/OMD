@@ -1,0 +1,143 @@
+@import "../../assets/base.css";
+
+#main-page {
+  position: absolute;
+  left: 0;
+  top: 30px;
+  width: 100%;
+  height: calc(100% - 30px);
+}
+
+#main-header {
+  width: 100%;
+  height: 5%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+#main-header-md, #main-header-preview{
+  height: 100%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font: 10pt Roboto;
+  color: var(--subtitle);
+
+}
+
+
+#main-header-filename{
+  height: 100%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+#main-header-filename-in{
+  height: 60%;
+  font: 10pt Roboto;
+  border-bottom: 2px solid white;
+  color: white;
+
+}
+
+
+#main-main {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+}
+
+#main-md {
+  height: 95%;
+  position: relative;
+  display: flex;
+  font: 14pt Roboto;
+}
+
+#main-md-rows {
+  width: 10%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  font: 14pt Roboto;
+
+}
+
+#main-md-text {
+  position: relative;
+  width: 90%;
+  height: 100%;
+}
+
+#main-md-light {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  font: 14pt Roboto;
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+#main-md-raw {
+  color: var(--subtitle);
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: transparent;
+  resize: none;
+  border: none;
+  outline: none;
+  caret-color: white;
+  font: 14pt Roboto;
+  overflow: auto;
+}
+
+#main-hr {
+  height: 95%;
+  border: 1px solid white;
+}
+
+#main-preview {
+  height: 90%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+}
+
+#main-preview-block {
+  width: 90%;
+  overflow: auto;
+  &::-webkit-scrollbar{
+    width: 0;
+    height: 0;
+  }
+  color: white;
+
+}
+
+
+#main-footer {
+  width: 100%;
+  height: 5%;
+  display: flex;
+}

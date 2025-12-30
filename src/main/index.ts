@@ -1,8 +1,9 @@
-import { app, shell, BrowserWindow, ipcMain, screen, nativeImage } from 'electron'
-import { join } from 'path'
-import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import {app, shell, BrowserWindow, ipcMain, screen, nativeImage, dialog} from 'electron'
+import {join} from 'path'
+import {electronApp, optimizer, is} from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import * as electron from "electron";
+import * as fs from "node:fs";
 
 function createWindow(): void {
   const {width, height} = screen.getPrimaryDisplay().workAreaSize;
@@ -26,7 +27,7 @@ function createWindow(): void {
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url).then()
-    return { action: 'deny' }
+    return {action: 'deny'}
   })
 
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
@@ -46,23 +47,53 @@ app.whenReady().then(() => {
   })
 
   ipcMain.on('ping', () => console.log('pong'))
-  ipcMain.on("t_wrap", (e)=>{
-    const win =BrowserWindow.fromWebContents(e.sender);
+  ipcMain.on("t_wrap", (e) => {
+    const win = BrowserWindow.fromWebContents(e.sender);
     win?.minimize();
   })
-  ipcMain.on("t_resize", (e)=>{
-    const win =BrowserWindow.fromWebContents(e.sender);
-    if (win?.isMaximized()){
+  ipcMain.on("t_resize", (e) => {
+    const win = BrowserWindow.fromWebContents(e.sender);
+    if (win?.isMaximized()) {
       win?.unmaximize()
-    }else{
+    } else {
       win?.maximize()
     }
   })
-  ipcMain.on("t_close", (e)=>{
-    const win =BrowserWindow.fromWebContents(e.sender);
+  ipcMain.on("t_close", (e) => {
+    const win = BrowserWindow.fromWebContents(e.sender);
     win?.close();
   })
+  ipcMain.handle("file_create", async (e) => {
+    const a = await dialog.showSaveDialog({
+      title: "Create file",
+      filters:[
+        {
+          name:"Markdown",
+          extensions:["md"]
+        }
+      ]
+    })
 
+    const path = a.filePath;
+    if (path.length>0){
+      fs.writeFileSync(path, "");
+    }
+    return `${path}`;
+  })
+  ipcMain.handle("file_open", async (e) => {
+    const a = await dialog.showOpenDialog({
+      title: "Create file",
+      filters:[
+        {
+          name:"Markdown",
+          extensions:["md"]
+        }
+      ]
+    })
+
+    const path = a.filePaths[0];
+    return `${path}`;
+  })
 
   createWindow()
 

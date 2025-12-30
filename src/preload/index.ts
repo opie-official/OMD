@@ -6,6 +6,8 @@ const api = {
   t_wrap: () => electronAPI.ipcRenderer.send("t_wrap"),
   t_resize: () => electronAPI.ipcRenderer.send("t_resize"),
   t_close: () => electronAPI.ipcRenderer.send("t_close"),
+  file_create: ()=> electronAPI.ipcRenderer.invoke("file_create"),
+  file_open: ()=> electronAPI.ipcRenderer.invoke("file_open"),
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to
