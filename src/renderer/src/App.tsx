@@ -2,7 +2,7 @@ import electronLogo from './assets/electron.svg'
 import "./assets/base.css"
 import "./assets/main.css"
 import "./assets/md.css"
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import TitleBar from "@renderer/components/TitleBar";
 import StartPage from "@renderer/components/StartPage";
 import MainPage from "@renderer/components/MainPage";
@@ -45,6 +45,23 @@ function App(): React.JSX.Element {
         setFile("");
         setCur(0);
     }
+
+    useEffect(() => {
+        const onKeyDown = (e: KeyboardEvent) => {
+            console.log(e.key, e.ctrlKey)
+            if (e.ctrlKey && "sS".includes(e.key)) {
+                console.log('saved')
+                e.preventDefault()
+                saveFile();
+            }else{
+                console.log("not saved")
+            }
+        }
+
+        window.addEventListener('keydown', onKeyDown)
+        return () => window.removeEventListener('keydown', onKeyDown)
+
+    }, [saved])
 
 
 
