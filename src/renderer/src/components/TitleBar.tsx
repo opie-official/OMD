@@ -7,6 +7,10 @@ import resize from "../../../../resources/title-bar-resize.svg"
 import close from "../../../../resources/title-bar-close.svg"
 
 
+import fx from "../../../../resources/fx.svg";
+import play from "../../../../resources/play.svg";
+import export_ from "../../../../resources/export.svg";
+
 interface Props {
     children: ReactNode;
     onclick: () => void;
@@ -188,13 +192,23 @@ export default function TitleBar(props: TitleProps) {
                 <img src={icon}/>
                 <p id={"titlebar-logo-p"}>OMD</p>
             </div>
-            {props.cur == 1 && <div id={"titlebar-menu"}>
-                {
-                    buttons.map((el, key) => {
-                        return <MenuButton {...el} key={key}/>
-                    })
-                }
-            </div>}
+            {props.cur == 1 &&
+                <>
+                    <div id={"titlebar-menu"}>
+                        {
+                            buttons.map((el, key) => {
+                                return <MenuButton {...el} key={key}/>
+                            })
+                        }
+                    </div>
+                    <div id={"titlebar-center"}>
+                        <button className={"titlebar-center"}><img src={fx}/></button>
+                        <button className={"titlebar-center"}><img src={play}/></button>
+                        <button className={"titlebar-center"}><img src={export_}/></button>
+
+                    </div>
+                </>
+            }
             <div id={"titlebar-buttons"}>
                 {
                     <>

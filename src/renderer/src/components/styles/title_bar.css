@@ -128,3 +128,20 @@
     }
 }
 
+#titlebar-center{
+    height: 100%;
+    display: flex;
+    &>button{
+        height: 100%;
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background: transparent;
+        border: 0 solid;
+        &>img{
+            width: 40%;
+        }
+    }
+}
